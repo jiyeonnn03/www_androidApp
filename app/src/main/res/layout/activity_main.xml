@@ -10,8 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#2196F3">
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/btn_invisible1"
@@ -20,39 +19,40 @@
             android:layout_weight="1"
             android:visibility="invisible" />
 
-        <ImageButton
-            android:id="@+id/btn_cam"
-            android:layout_width="40dp"
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            android:adjustViewBounds="true"
-            android:background="#00FFFFFF"
-            android:filterTouchesWhenObscured="false"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/whitecam" />
+            android:layout_gravity="right"
+            android:layout_marginEnd="1dp"
+            android:layout_marginRight="1dp"
+            android:text="추가"
+            android:textColor="@color/custom_blue"
+            android:textStyle="bold"
+            app:backgroundTint="#FFFFFF" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/line" />
 
     <CalendarView
         android:id="@+id/calendarView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="8dp"
-        android:layout_marginLeft="30dp"/>
-
-    <TextView
-        android:id="@+id/today"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-         />
+        android:focusedMonthDateColor="@color/custom_blue" />
 
     <Button
         android:id="@+id/btn_view"
-        android:layout_width="match_parent"
+        android:layout_width="356dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:background="#B32196F3"
+        android:background="@color/custom_blue"
         android:text="기록 보기" />
 
 </LinearLayout>

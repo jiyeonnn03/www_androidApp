@@ -8,6 +8,36 @@
     android:orientation="vertical"
     tools:context=".ListActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_invisible1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btn_goToMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginEnd="1dp"
+            android:layout_marginRight="1dp"
+            android:text="처음으로"
+            android:textColor="@color/custom_blue"
+            android:textStyle="bold"
+            app:backgroundTint="#FFFFFF" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/line" />
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
@@ -57,11 +87,6 @@
                 android:text="여름 제주도 너무 좋았당"
                 android:textColor="#000000" />
 
-            <Button
-                android:id="@+id/goToMain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button" />
         </LinearLayout>
     </ScrollView>
 
