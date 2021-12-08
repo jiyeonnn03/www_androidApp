@@ -13,15 +13,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginLeft="70dp"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="70dp">
 
         <TextView
             android:id="@+id/tv_result_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2021.07.27"
-            android:textColor="#000000" />
+            android:gravity="center"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="20sp"
+            android:textColor="#1976D2" />
 
         <ImageView
             android:id="@+id/iv_picture2"
@@ -29,14 +32,6 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             app:srcCompat="@drawable/fashion" />
-
-        <TextView
-            android:id="@+id/tv_result_weather"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="적당했음"
-            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/txt_result_weather"
@@ -93,7 +88,6 @@
             android:id="@+id/txt_result_memo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="메모"
             android:textSize="20sp" />

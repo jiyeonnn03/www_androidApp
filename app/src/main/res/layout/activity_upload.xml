@@ -21,12 +21,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_selectdate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#1976D2" />
-
             <ImageView
                 android:id="@+id/iv_picture"
                 android:layout_width="wrap_content"
@@ -36,6 +30,7 @@
                 android:layout_marginRight="70dp"
                 android:layout_marginBottom="30dp"
                 android:adjustViewBounds="true"
+                android:onClick="click_pic"
                 app:srcCompat="@drawable/whitecam" />
 
             <TextView
@@ -56,23 +51,23 @@
                     android:id="@+id/et_temperMax"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
                     android:layout_weight="1"
-                    android:hint="최고 기온 입력"
                     android:gravity="center_horizontal"
-                    android:textSize="14sp"
-                    android:inputType="number" />
+                    android:hint="최고 기온 입력"
+                    android:inputType="numberSigned"
+                    android:maxLength="3"
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/et_temperMin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
                     android:layout_weight="1"
-                    android:hint="최저 기온 입력"
+                    android:maxLength="3"
                     android:gravity="center_horizontal"
-                    android:textSize="14sp"
-                    android:inputType="number" />
+                    android:hint="최저 기온 입력"
+                    android:inputType="numberSigned"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -93,7 +88,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:hint="체감 날씨 입력(추움/더움/적당함..)"
-                android:inputType="textMultiLine" />
+                android:textSize="14sp"
+                android:inputType="text" />
 
             <TextView
                 android:id="@+id/txt_memo"
@@ -111,7 +107,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:hint="메모를 작성하세요 :)"
-                android:inputType="textMultiLine" />
+                android:inputType="text" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
