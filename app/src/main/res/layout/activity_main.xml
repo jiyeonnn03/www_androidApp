@@ -26,7 +26,7 @@
             android:layout_gravity="right"
             android:layout_marginEnd="1dp"
             android:layout_marginRight="1dp"
-            android:text="추가"
+            android:text="전체보기"
             android:textColor="@color/custom_blue"
             android:textStyle="bold"
             app:backgroundTint="#FFFFFF" />
@@ -53,6 +53,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:background="@color/custom_blue"
-        android:text="기록 보기" />
+        android:text="기록 보기"
+        android:visibility="invisible" />
 
 </LinearLayout>

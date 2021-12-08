@@ -38,98 +38,11 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/line" />
 
-    <ScrollView
-        android:id="@+id/scrollView2"
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_result_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="70dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="70dp"
-                android:text="2021.07.27"
-                android:textColor="#000000" />
-
-            <ImageView
-                android:id="@+id/iv_picture2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="70dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="70dp"
-                android:adjustViewBounds="true"
-                app:srcCompat="@drawable/fashion" />
-
-            <TextView
-                android:id="@+id/tv_result_weather"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="70dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="70dp"
-                android:text="적당했음"
-                android:textColor="#000000" />
-
-            <TextView
-                android:id="@+id/tv_weather2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="현재 날씨"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/temperMax2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:gravity="center_horizontal"
-                    android:inputType="number"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/temperMin2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:gravity="center_horizontal"
-                    android:inputType="number"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_memo2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="메모"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/tv_result_memo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:inputType="textMultiLine" />
-
-        </LinearLayout>
-    </ScrollView>
-
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/record_list"/>
 </LinearLayout>

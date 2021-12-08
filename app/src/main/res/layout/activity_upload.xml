@@ -8,48 +8,9 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:text="취소"
-            android:textColor="@color/custom_blue"
-            android:textStyle="bold"
-            app:backgroundTint="#FFFFFF" />
-
-        <Button
-            android:id="@+id/btn_invisible2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:visibility="invisible"
-            app:backgroundTint="#FFFFFF" />
-
-        <Button
-            android:id="@+id/btn_complete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"
-            android:text="완료"
-            android:textColor="@color/custom_blue"
-            android:textStyle="bold"
-            app:backgroundTint="#FFFFFF" />
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/line" />
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -78,7 +39,7 @@
                 app:srcCompat="@drawable/whitecam" />
 
             <TextView
-                android:id="@+id/tv_weather"
+                android:id="@+id/txt_weather"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -92,7 +53,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/temperMax"
+                    android:id="@+id/et_temperMax"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -103,7 +64,7 @@
                     android:inputType="number" />
 
                 <EditText
-                    android:id="@+id/temperMin"
+                    android:id="@+id/et_temperMin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -115,49 +76,8 @@
 
             </LinearLayout>
 
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/radioButton1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="맑음" />
-
-                <RadioButton
-                    android:id="@+id/radioButton2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="흐림" />
-
-                <RadioButton
-                    android:id="@+id/radioButton3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="비" />
-
-                <RadioButton
-                    android:id="@+id/radioButton4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="눈" />
-
-                <RadioButton
-                    android:id="@+id/radioButton5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="소나기" />
-            </RadioGroup>
-
             <TextView
-                android:id="@+id/tv3"
+                android:id="@+id/txt_user_weather"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -166,39 +86,17 @@
                 android:text="체감 날씨"
                 android:textSize="20sp" />
 
-            <RadioGroup
+            <EditText
+                android:id="@+id/et_user_weather"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/radioButton6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text="추웠음☃"
-                    android:textSize="16sp" />
-
-                <RadioButton
-                    android:id="@+id/radioButton7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="적당했음😀"
-                    android:textSize="16sp" />
-
-                <RadioButton
-                    android:id="@+id/radioButton8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="더웠음🔥"
-                    android:textSize="16sp" />
-            </RadioGroup>
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="체감 날씨 입력(추움/더움/적당함..)"
+                android:inputType="textMultiLine" />
 
             <TextView
-                android:id="@+id/tv_memo"
+                android:id="@+id/txt_memo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
