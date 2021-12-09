@@ -26,7 +26,7 @@
             android:layout_gravity="right"
             android:layout_marginEnd="1dp"
             android:layout_marginRight="1dp"
-            android:text="처음으로"
+            android:text="달력보기"
             android:textColor="@color/custom_blue"
             android:textStyle="bold"
             app:backgroundTint="#FFFFFF" />

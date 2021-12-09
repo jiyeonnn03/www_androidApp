@@ -1,5 +1,6 @@
 package com.example.www;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -29,11 +30,12 @@ public class TodayGreen implements DayViewDecorator {
         return day.equals(date);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void decorate(DayViewFacade view) {
         view.addSpan(new StyleSpan(Typeface.BOLD));
         view.addSpan(new RelativeSizeSpan(1.4f));
-        view.addSpan(new ForegroundColorSpan(Color.GREEN));
+        view.addSpan(new ForegroundColorSpan(R.color.custom_blue));
     }
 
     public void setDate(Date date) {

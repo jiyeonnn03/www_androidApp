@@ -50,10 +50,6 @@ public class UploadActivity extends AppCompatActivity {
     String FILENAME;
     int flag = 0;
 
-    Button btn_cancel, btn_complete;
-    ImageView iv_picture;
-    TextView tv_selectdate;
-
     String mCurrentPhotoPath;
     final static int REQUEST_TAKE_PHOTO = 1;
     final static int REQUEST_TAKE_ALBUM = 2;
@@ -65,11 +61,10 @@ public class UploadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_upload);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-
-//        getSupportActionBar().setDisplayShowTitleEnabled(false);
         TextView toolbar_title = (TextView) findViewById(R.id.toolbar_title);
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         Intent getIntent = getIntent();
         String year = getIntent.getStringExtra("year");
@@ -89,7 +84,6 @@ public class UploadActivity extends AppCompatActivity {
         File directory = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES) + "");
         File[] files = directory.listFiles();
 
-//        List<String> filesNameList = new ArrayList<>();
         String date = year + month + day;
 
         //파일명 비교해서 이미지와 텍스트 가져오기
@@ -111,97 +105,21 @@ public class UploadActivity extends AppCompatActivity {
                         et_user_weather.setText(buffer.readLine());
                         et_memo.setText(buffer.readLine());
                         buffer.close();
-
                         break;
                     } catch (Exception e) {
-                        Toast.makeText(this, "이미지 파일 불러오기 실패", Toast.LENGTH_LONG).show();
+                        Log.d(TAG, "이미지 파일 불러오기 실패");
+
                     }
-
-//                filesNameList.add(files[i].getName());
                 }
-//                if (files[i].getName().contains(".txt")) {
-//                    try {
-//                        FileInputStream fis = openFileInput(FILENAME);
-//                        BufferedReader buffer = new BufferedReader(new InputStreamReader(fis));
-//                        //                    List<String> filelist = new ArrayList<>();
-//                        //파일의 버퍼에서 한 줄씩 읽어오기(최고기온, 최저기온, 체감날씨, 메모 순)
-//                        et_temperMax.setText(buffer.readLine());
-//                        et_temperMin.setText(buffer.readLine());
-//                        et_user_weather.setText(buffer.readLine());
-//                        et_memo.setText(buffer.readLine());
-//                        buffer.close();
-//                        if (flag == 1) {
-//                            flag = 2;
-//                            break;
-//                        }
-//                    } catch (Exception e) {
-//                        Toast.makeText(this, "텍스트 파일 불러오기 실패", Toast.LENGTH_LONG).show();
-//                    }
-//                }
-
-            } else
-                continue;
+            }
         }
 
-
-        //날짜와 일치하는 파일 없으면 새로 생성
-        if (flag != 2) {
-
-        }
-
-
-//        et_selectdate = (TextView) findViewById(R.id.et_selectdate);
-//        EditText temperMax = (EditText) findViewById(R.id.temperMax);
-//        EditText temperMin = (EditText) findViewById(R.id.temperMin);
-//        EditText memo = (EditText) findViewById(R.id.et_memo);
-//
-//        et_selectdate.setText(year + month + day);
-//        FILENAME = year + month + day + ".txt";
-////        Toast.makeText(this, FILENAME, Toast.LENGTH_SHORT).show();
-//
-//        //취소 버튼 클릭 시, 이전 화면인 메인으로 돌아가기
-//        btn_cancel = (Button) findViewById(R.id.btn_cancel);
-//        btn_cancel.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
-//        final String[] result_date = new String[1];
-
-//        //완료 버튼 클릭 시, 리스트 화면으로 전환
-//        btn_complete = (Button) findViewById(R.id.btn_complete);
-//        btn_complete.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                try {
-//                    FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-//                    BufferedWriter buf = new BufferedWriter(new OutputStreamWriter(fos));
-//
-//                    buf.append(temperMax.getText().toString());buf.newLine();
-//                    buf.append(temperMin.getText().toString());buf.newLine();
-//                    buf.append(memo.getText().toString());
-//
-//                    buf.close();
-//                    Toast.makeText(UploadActivity.this, FILENAME + "텍스트 파일 쓰기 성공", Toast.LENGTH_SHORT);
-//
-//                    fos.close();
-//                } catch (IOException e) {
-//                    Toast.makeText(getApplicationContext(), "파일 쓰기 실패", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                Intent intent = new Intent(UploadActivity.this, ListActivity.class);
-//                intent.putExtra("year", year);
-//                intent.putExtra("month", month);
-//                intent.putExtra("day", day);
-//                startActivity(intent);
-//            }
-//        });
-//
         //카메라 접근 권한 요청
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                Log.d(TAG, "권한 설정 완료");
+                Log.d(TAG, "카메라 접근 권한 설정 완료");
             } else {
-                Log.d(TAG, "권한 설정 요청");
+                Log.d(TAG, "카메라 접근 권한 설정 요청");
                 ActivityCompat.requestPermissions(UploadActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             }
         }
@@ -220,31 +138,20 @@ public class UploadActivity extends AppCompatActivity {
                 alert.setPositiveButton("앨범", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        goToAlbum();
+                        goToAlbum(today);
                     }
                 });
 
                 alert.setNegativeButton("카메라", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
+                    public void onClick(DialogInterface dialog, int which) {
                         dispatchTakePictureIntent(today);
                     }
                 });
 
                 alert.show();
-//                switch (v.getId()) {
-//                    case R.id.iv_picture:
-//                        String date = year + month + day;
-//                        dispatchTakePictureIntent(date);
-//                        break;
-//                }
             }
         });
-    }
-
-
-    public void click_pic() {
-
     }
 
     //intent로 넘어온 date 반환
@@ -260,6 +167,7 @@ public class UploadActivity extends AppCompatActivity {
         return date;
     }
 
+    //저장 버튼 클릭 시 호출
     public void click_save() {
         String[] date = intent_date();
 
@@ -269,18 +177,20 @@ public class UploadActivity extends AppCompatActivity {
         EditText et_memo = (EditText) findViewById(R.id.et_memo);
 
         if (et_temperMax.getText().toString().length() == 0) {
-            Toast.makeText(this, "최고 기온을 입력하세요", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "최고 기온을 입력하세요.", Toast.LENGTH_SHORT).show();
             et_temperMax.requestFocus();
             return;
-        }
-        if (et_temperMin.getText().toString().length() == 0) {
-            Toast.makeText(this, "최저 기온을 입력하세요", Toast.LENGTH_SHORT).show();
+        } if (et_temperMin.getText().toString().length() == 0) {
+            Toast.makeText(this, "최저 기온을 입력하세요.", Toast.LENGTH_SHORT).show();
             et_temperMin.requestFocus();
             return;
-        }
-        if (et_user_weather.getText().toString().length() == 0) {
-            Toast.makeText(this, "체감 날씨를 입력하세요", Toast.LENGTH_SHORT).show();
+        } if (et_user_weather.getText().toString().length() == 0) {
+            Toast.makeText(this, "체감 날씨를 입력하세요.", Toast.LENGTH_SHORT).show();
             et_user_weather.requestFocus();
+            return;
+        } if (Integer.parseInt(et_temperMax.getText().toString()) < Integer.parseInt(et_temperMin.getText().toString())) { //최고 기온이 최저 기온보다 작은 경우
+            Toast.makeText(this, "최고 기온이 최저 기온보다 낮습니다."+"\n"+"다시 입력하세요.", Toast.LENGTH_SHORT).show();
+            et_temperMax.requestFocus();
             return;
         } else {
             try {
@@ -298,8 +208,10 @@ public class UploadActivity extends AppCompatActivity {
                 buf.close();
 
                 fos.close();
+                Toast.makeText(this, date[0] + "년" + date[1] + "월" + date[2] + "일의 기록 저장 성공", Toast.LENGTH_SHORT).show();
+                finish();
             } catch (IOException e) {
-                Toast.makeText(getApplicationContext(), "파일 쓰기 실패", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, date[0] + "년" + date[1] + "월" + date[2] + "일의 기록 저장 실패", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -322,12 +234,13 @@ public class UploadActivity extends AppCompatActivity {
 //                break; //제일 마지막 이미지 파일을 가져오기 위해 break 걸지 않음
             }
         }
-
         return uri;
     }
 
-    //flag 1은 삭제 버튼 누른 경우, 이외에는 파일만 삭제하고 화면 이동 안함
+    //삭제 버튼 클릭 시 호출
     public void click_remove() {
+        String[] date = intent_date();
+
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle("삭제");
         alert.setMessage("정말로 삭제 하시겠습니까?");
@@ -339,10 +252,10 @@ public class UploadActivity extends AppCompatActivity {
                 boolean txtFlag = remove_txtFile();
 
                 if (imgFlag && txtFlag) {
-                    Toast.makeText(alert.getContext(), "기록 삭제", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(alert.getContext(), date[0] + "년 " + date[1] + "월 " + date[2] + "일의 기록 삭제", Toast.LENGTH_SHORT).show();
                     finish();
-                    Intent intent = new Intent(UploadActivity.this, MainActivity.class);
-                    startActivity(intent);
+                } else {
+                    Toast.makeText(alert.getContext(), "삭제할 기록이 없습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -354,11 +267,9 @@ public class UploadActivity extends AppCompatActivity {
         });
 
         alert.show();
-
-
     }
 
-
+    //이미지 파일 삭제 함수
     public boolean remove_imgFile() {
         Uri uri = findUri();
         boolean isDelete = false;
@@ -372,6 +283,7 @@ public class UploadActivity extends AppCompatActivity {
         return isDelete;
     }
 
+    //텍스트 파일 삭제 함수
     public boolean remove_txtFile() {
         String[] date = intent_date();
         String today = date[0] + date[1] + date[2];
@@ -385,7 +297,7 @@ public class UploadActivity extends AppCompatActivity {
         return isDelete;
     }
 
-    //텍스트 입력 안한 채 처음으로 돌아가려 하면 이미지 파일 삭제
+    //(텍스트 입력 안한 채 처음으로 돌아가려 하면 이미지 파일 삭제)
     public void click_home() {
         EditText et_temperMax = (EditText) findViewById(R.id.et_temperMax);
         EditText et_temperMin = (EditText) findViewById(R.id.et_temperMin);
@@ -409,7 +321,7 @@ public class UploadActivity extends AppCompatActivity {
     }
 
     // 카메라로 촬영한 영상을 가져오는 부분
-//    @Override
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         ImageView iv_picture = (ImageView) findViewById(R.id.iv_picture);
 
@@ -431,9 +343,9 @@ public class UploadActivity extends AppCompatActivity {
                                         FileOutputStream out = new FileOutputStream(file);  // 파일을 쓸 수 있는 스트림을 준비하기
                                         bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);   // compress 함수를 사용해 스트림에 비트맵을 저장하기
                                         out.close();    // 스트림 닫아주기
-                                        Toast.makeText(this, "파일 저장 성공", Toast.LENGTH_LONG).show();
+                                        Log.d(TAG, "REQUEST_TAKE_PHOTO VER 29 파일 저장 성공");
                                     } catch (Exception e) {
-                                        Toast.makeText(getApplicationContext(), "파일 저장 실패", Toast.LENGTH_SHORT).show();
+                                        Log.d(TAG, "REQUEST_TAKE_PHOTO VER 29 파일 저장 실패");
                                     }
                                 }
                             } catch (IOException e) {
@@ -446,13 +358,12 @@ public class UploadActivity extends AppCompatActivity {
                                     iv_picture.setImageBitmap(bitmap);
 
                                     try {
-//                                        file.createNewFile();   // 자동으로 빈 파일을 생성하기
                                         FileOutputStream out = new FileOutputStream(file);  // 파일을 쓸 수 있는 스트림을 준비하기
                                         bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);   // compress 함수를 사용해 스트림에 비트맵을 저장하기
                                         out.close();    // 스트림 닫아주기
-                                        Toast.makeText(this, "파일 저장 성공", Toast.LENGTH_LONG).show();
+                                        Log.d(TAG, "REQUEST_TAKE_PHOTO 파일 저장 성공");
                                     } catch (Exception e) {
-                                        Toast.makeText(getApplicationContext(), "파일 저장 실패", Toast.LENGTH_SHORT).show();
+                                        Log.d(TAG, "REQUEST_TAKE_PHOTO 파일 저장 실패");
                                     }
                                 }
                             } catch (IOException e) {
@@ -470,6 +381,7 @@ public class UploadActivity extends AppCompatActivity {
                             InputStream in = getContentResolver().openInputStream(intent.getData());
 
                             Bitmap bitmap = BitmapFactory.decodeStream(in);
+//                            Bitmap bitmap 	= MediaStore.Images.Media.getBitmap(getContentResolver(), intent.getData());
                             in.close();
 
                             iv_picture.setImageBitmap(bitmap);
@@ -477,9 +389,9 @@ public class UploadActivity extends AppCompatActivity {
                                 FileOutputStream out = new FileOutputStream(file);  // 파일을 쓸 수 있는 스트림을 준비하기
                                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);   // compress 함수를 사용해 스트림에 비트맵을 저장하기
                                 out.close();    // 스트림 닫아주기
-                                Toast.makeText(this, "파일 저장 성공", Toast.LENGTH_LONG).show();
+                                Log.d(TAG, "REQUEST_TAKE_ALBUM 파일 저장 성공");
                             } catch (Exception e) {
-                                Toast.makeText(getApplicationContext(), "파일 저장 실패", Toast.LENGTH_SHORT).show();
+                                Log.d(TAG, "REQUEST_TAKE_ALBUM 파일 저장 실패");
                             }
                         } catch (Exception e) {
 
@@ -520,16 +432,27 @@ public class UploadActivity extends AppCompatActivity {
         }
     }
 
-    private void goToAlbum() {
+    private void goToAlbum(String filename) {
         Intent takeAlbumIntent = new Intent(Intent.ACTION_PICK);
-        takeAlbumIntent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-        startActivityForResult(takeAlbumIntent, REQUEST_TAKE_ALBUM);
+        Boolean remove = remove_imgFile(); //존재하는 이미지 파일 삭제 후 새로운 이미지 저장
+        if (takeAlbumIntent.resolveActivity(getPackageManager()) != null) {
+            File photoFile = null;
+            try {
+                photoFile = createImageFile(filename);
+            } catch (IOException ex) {
+            }
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this, "com.example.android.fileprovider", photoFile);
+                takeAlbumIntent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                takeAlbumIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takeAlbumIntent, REQUEST_TAKE_ALBUM);
+            }
+        }
     }
 
     ////////////////////////////////// 옵션 메뉴
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        super.onCreateOptionsMenu(menu);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.option_menu, menu);
         return true;
@@ -548,10 +471,6 @@ public class UploadActivity extends AppCompatActivity {
                 click_home();
                 break;
         }
-
         return true;
-
     }
-
-
 }

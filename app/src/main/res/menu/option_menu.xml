@@ -8,5 +8,5 @@
 
 
     <item android:id="@+id/home"
-        android:title="처음으로" />
+        android:title="달력보기" />
 </menu>
