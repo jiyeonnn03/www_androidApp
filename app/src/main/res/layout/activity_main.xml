@@ -44,7 +44,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        app:mcv_selectionColor="@color/custom_blue"/>
 
     <Button
         android:id="@+id/btn_view"

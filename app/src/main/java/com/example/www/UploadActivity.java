@@ -48,7 +48,6 @@ import java.util.List;
 
 public class UploadActivity extends AppCompatActivity {
     String FILENAME;
-    int flag = 0;
 
     String mCurrentPhotoPath;
     final static int REQUEST_TAKE_PHOTO = 1;
@@ -87,30 +86,31 @@ public class UploadActivity extends AppCompatActivity {
         String date = year + month + day;
 
         //파일명 비교해서 이미지와 텍스트 가져오기
-        for (int i = 0; i < files.length; i++) {
-            if (files[i].getName().contains(date)) {
-                if (files[i].getName().contains(".jpg")) {
-                    try {
-                        //이미지 가져오기
-                        Uri uri = Uri.parse(directory + "/" + files[i].getName());
-                        iv_picture.setImageURI(uri);
-                        flag = 1;
+        if (files != null) {
+            for (int i = 0; i < files.length; i++) {
+                if (files[i].getName().contains(date)) {
+                    if (files[i].getName().contains(".jpg")) {
+                        try {
+                            //이미지 가져오기
+                            Uri uri = Uri.parse(directory + "/" + files[i].getName());
+                            iv_picture.setImageURI(uri);
 
-                        FileInputStream fis = openFileInput(FILENAME);
-                        BufferedReader buffer = new BufferedReader(new InputStreamReader(fis));
+                            FileInputStream fis = openFileInput(FILENAME);
+                            BufferedReader buffer = new BufferedReader(new InputStreamReader(fis));
 
-                        buffer.readLine(); //select date 한 줄 제거
-                        et_temperMax.setText(buffer.readLine());
-                        et_temperMin.setText(buffer.readLine());
-                        et_user_weather.setText(buffer.readLine());
-                        et_memo.setText(buffer.readLine());
-                        buffer.close();
-                        break;
-                    } catch (Exception e) {
-                        Log.d(TAG, "이미지 파일 불러오기 실패");
-
+                            buffer.readLine(); //select date 한 줄 제거
+                            et_temperMax.setText(buffer.readLine());
+                            et_temperMin.setText(buffer.readLine());
+                            et_user_weather.setText(buffer.readLine());
+                            et_memo.setText(buffer.readLine());
+                            buffer.close();
+                            break;
+                        } catch (Exception e) {
+                            Log.d(TAG, "이미지 파일 불러오기 실패");
+                        }
                     }
-                }
+                } else
+                    continue;
             }
         }
 
@@ -243,7 +243,7 @@ public class UploadActivity extends AppCompatActivity {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle("삭제");
-        alert.setMessage("정말로 삭제 하시겠습니까?");
+        alert.setMessage("정말 삭제 하시겠습니까?");
 
         alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
@@ -362,6 +362,7 @@ public class UploadActivity extends AppCompatActivity {
                                         bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);   // compress 함수를 사용해 스트림에 비트맵을 저장하기
                                         out.close();    // 스트림 닫아주기
                                         Log.d(TAG, "REQUEST_TAKE_PHOTO 파일 저장 성공");
+                                        Log.d(TAG, mCurrentPhotoPath);
                                     } catch (Exception e) {
                                         Log.d(TAG, "REQUEST_TAKE_PHOTO 파일 저장 실패");
                                     }
@@ -390,6 +391,7 @@ public class UploadActivity extends AppCompatActivity {
                                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);   // compress 함수를 사용해 스트림에 비트맵을 저장하기
                                 out.close();    // 스트림 닫아주기
                                 Log.d(TAG, "REQUEST_TAKE_ALBUM 파일 저장 성공");
+                                Log.d(TAG, mCurrentPhotoPath);
                             } catch (Exception e) {
                                 Log.d(TAG, "REQUEST_TAKE_ALBUM 파일 저장 실패");
                             }
@@ -398,6 +400,7 @@ public class UploadActivity extends AppCompatActivity {
                         }
                     } else if (resultCode == RESULT_CANCELED) {
                         Toast.makeText(this, "사진 선택 취소", Toast.LENGTH_LONG).show();
+                        Log.d(TAG, "사진 선택 취소");
                     }
                 }
             }
@@ -443,6 +446,9 @@ public class UploadActivity extends AppCompatActivity {
             }
             if (photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(this, "com.example.android.fileprovider", photoFile);
+                Log.d(TAG, "photoURI : "+photoURI);
+                Log.d(TAG, "photoURI.getPath : "+photoURI.getPath());
+
                 takeAlbumIntent.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 takeAlbumIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takeAlbumIntent, REQUEST_TAKE_ALBUM);

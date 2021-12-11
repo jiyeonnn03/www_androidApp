@@ -24,14 +24,14 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:textSize="20sp"
-            android:textColor="#1976D2" />
+            android:textColor="@color/custom_blue" />
 
         <ImageView
             android:id="@+id/iv_picture2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/fashion" />
+            app:srcCompat="@drawable/whiteplus" />
 
         <TextView
             android:id="@+id/txt_result_weather"
@@ -98,6 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:layout_marginBottom="10dp"
             android:inputType="textMultiLine" />
     </LinearLayout>
 </LinearLayout>
